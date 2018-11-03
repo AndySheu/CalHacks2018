@@ -8,6 +8,7 @@ import heapq
 import sys, os
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 from googlesearch import search
+import PyPDF2
 
 sys.stdout = open(os.devnull, 'w')
 nltk.download('stopwords')
@@ -86,15 +87,34 @@ def text_file(path):
     text = open(path, 'r').read()
     summarize(text)
 
+def pdf(path):
+    fi = open(path, 'rb')
+    pdfReader = PyPDF2.PdfFileReader(fi)
+    text = ''
+    converted = False
+    for i in range(pdfReader.numPages):
+        new = pdfReader.getPage(i).extractText()
+        if new:
+            converted = True
+        text += new
+    fi.close()
+    if converted:
+        print(text)
+        summarize(text)
+    else:
+        print("PDF files should have text")
+
 def local(fi):
     end = fi.split('.')[-1]
     if end.lower() in ['bmp', 'pnm', 'png', 'jfif', 'jpeg', 'tiff']:
         image(fi)
     elif end.lower() in ['txt']:
         text_file(fi)
+    elif end.lower() in ['pdf']:
+        pdf(fi)
     else:
         print('Images must be: BMP, PNM, PNG, JFIF, JPEG, or TIFF')
-        print('Text files must be: TXT')
+        print('Text files must be: TXT, or PDF')
 
 def website(site):
     page = urllib.request.urlopen(site).read()
