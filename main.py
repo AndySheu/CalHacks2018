@@ -1,5 +1,5 @@
-# from PIL import Image
-# import pytesseract
+from PIL import Image
+import pytesseract
 import bs4
 import urllib.request
 import re
@@ -7,7 +7,7 @@ import nltk
 import heapq
 import sys, os
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
-# from googlesearch import search
+from googlesearch import search
 
 sys.stdout = open(os.devnull, 'w')
 nltk.download('stopwords')
@@ -68,7 +68,7 @@ def summarize(text, ref='', lines=7):
                 print("=>",ref[i])
             print('\n')
             return
-        print(s, end=' ')
+        print(s)
     print('\n')
 
 def image(img):
