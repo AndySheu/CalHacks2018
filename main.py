@@ -1,12 +1,13 @@
-from PIL import Image
-import pytesseract
+# from PIL import Image
+# import pytesseract
 import bs4
 import urllib.request
 import re
 import nltk
 import heapq
 import sys, os
-from googlesearch import search
+from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
+# from googlesearch import search
 
 sys.stdout = open(os.devnull, 'w')
 nltk.download('stopwords')
@@ -20,7 +21,14 @@ def summarize(text, lines=7):
     clean_text = re.sub(r'\W',' ',clean_text)
     clean_text = re.sub(r'\d',' ',clean_text)
     clean_text = re.sub(r'\s+',' ',clean_text)
-    sentences = nltk.sent_tokenize(text)
+    punkt_param = PunktParameters()
+    punkt_param.abbrev_types = set(['dr', 'vs', 'mr', 'mrs', 'prof', 'inc', 'i.e'])
+    sentence_splitter = PunktSentenceTokenizer(punkt_param)
+    """this is a fix for if last word of the sentence has an apostrophe 
+    or a quotation mark attached to it (like Hussey?')"""
+    text = text.replace('?"', '? "').replace('!"', '! "').replace('."', '. "')
+    sentences = sentence_splitter.tokenize(text)
+    #sentences = nltk.sent_tokenize(text)
     stop_words = nltk.corpus.stopwords.words('english')
 
     word_count = {}
