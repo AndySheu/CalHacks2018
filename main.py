@@ -13,7 +13,7 @@ nltk.download('stopwords')
 nltk.download('punkt')
 sys.stdout = sys.__stdout__
 
-def summarize(text, lines=7):
+def summarize(text, ref='', lines=7):
     text = re.sub(r'\[[0-9]*\]',' ',text)            
     text = re.sub(r'\s+',' ',text)    
     clean_text = text.lower()
@@ -53,9 +53,15 @@ def summarize(text, lines=7):
         if s[0] == ' ':
             s = s[1:]
         if 'refer' in s and len(scores.keys()) < 2:
-            print("Please be more specific")
+            print('Please be more specific\n')
+            if len(ref) > 1:
+                print('Here are some suggestions:')
+            for i in range(len(ref)):
+                print("=>",ref[i])
+            print('\n')
             return
-        print(s)
+        print(s, end=' ')
+    print('\n')
 
 def image(img):
     text = pytesseract.image_to_string(Image.open(img))
@@ -81,7 +87,11 @@ def website(site):
     text = ''
     for para in soup.find_all('p'):
         text += para.text
-    summarize(text)
+    ref = []
+    for li in soup.find_all('li'):
+        if ',' in li.text.lower() and 'last edited' not in li.text.lower() and 'text is available under the creative commons attribution-sharealike license' not in li.text.lower():
+            ref.append(li.text.split('\n')[0])
+    summarize(text, ref)
 
 def topic(topic):    
     try:
@@ -95,7 +105,10 @@ def topic(topic):
 def main():
     i = input('').lower()
     if i == 'exit' or i == 'quit':
+        os.system('clear')
         quit()
+    elif i == 'clear':
+        os.system('clear')
     elif '.' not in i:
         topic(i)
     else: 
@@ -108,7 +121,6 @@ def main():
                 website(i)
                 return
         local(i)
-    print()
     main()
     
     '''
