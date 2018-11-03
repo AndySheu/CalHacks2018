@@ -33,8 +33,6 @@ def summarize(text, ref='', lines=7):
     punkt_param = PunktParameters()
     punkt_param.abbrev_types = set(['dr', 'vs', 'mr', 'mrs', 'prof', 'inc', 'i.e'])
     sentence_splitter = PunktSentenceTokenizer(punkt_param)
-    """this is a fix for if last word of the sentence has an apostrophe 
-    or a quotation mark attached to it (like Hussey?')"""
     text = text.replace('?"', '? "').replace('!"', '! "').replace('."', '. "')
     sentences = sentence_splitter.tokenize(text)
     #sentences = nltk.sent_tokenize(text)
@@ -140,17 +138,5 @@ def main():
         local(i)
     if len(sys.argv) == 1:
         main()
-    
-    '''
-    input_type = ''
-    while input_type not in ['I', 'W', 'T']:
-        input_type = input('Input source (I, W, T): ')
-    if (input_type == 'I'):
-        image(input('Image name: '))
-    elif (input_type == 'W'):
-        website(input('Site url: '))
-    elif (input_type == 'T'):
-        topic(input('Topic: '))
-    '''
 
 main()
