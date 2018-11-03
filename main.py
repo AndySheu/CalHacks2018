@@ -14,6 +14,15 @@ nltk.download('stopwords')
 nltk.download('punkt')
 sys.stdout = sys.__stdout__
 
+def get_input():
+    if len(sys.argv) > 1:
+        text = str(sys.argv[1])
+        for e in sys.argv[2:]:
+            text += ' ' + str(e)
+        return text.lower()
+    else:
+        return input('').lower()
+
 def summarize(text, ref='', lines=7):
     text = re.sub(r'\[[0-9]*\]',' ',text)            
     text = re.sub(r'\s+',' ',text)    
@@ -111,7 +120,7 @@ def topic(topic):
         website(site)
 
 def main():
-    i = input('').lower()
+    i = get_input()
     if i == 'exit' or i == 'quit':
         os.system('clear')
         quit()
@@ -129,7 +138,8 @@ def main():
                 website(i)
                 return
         local(i)
-    main()
+    if len(sys.argv) == 1:
+        main()
     
     '''
     input_type = ''
