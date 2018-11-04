@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import main
 app = Flask(__name__)
 
-@app.route('/summarize_text', methods=['Post'])
+@app.route('/summarizeText', methods=['Post'])
 def search():
 	term = request.form['Search']
 	return main(term)
