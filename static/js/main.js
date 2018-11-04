@@ -25,7 +25,6 @@ $(document).ready(function(){
 
   $(function() {
     $('#btn_submit_text').click(function() {
- 
         $.ajax({
             url: '/summarizeText',
             data: $('#text_submit_form').serialize(),
