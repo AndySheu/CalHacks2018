@@ -10,6 +10,7 @@ def search():
 @app.route('/summarizePDF', methods = ['Post'])
 def summarize():
 	pdf_file = request.form['pdf_upload']
+	file_type = request.form['file_type']
 	return summarize.pdf(pdf_file)
 
 @app.route('/')
