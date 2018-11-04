@@ -61,12 +61,17 @@ $(document).ready(function(){
   $('#btn_submit_pdf').on('click', function(e) {
         e.preventDefault(); 
         $.ajax({
-            url: '/summarizeText',
-            data: $('#text_submit_form').serialize(),
+            url: '/summarizePDF',
+            data: $('#pdf_submit_form').serialize(),
             type: 'POST',
+
+            cache: false,
+            contentType: false,
+            processData: false,
+
             success: function(response) {
                 console.log("success!");
-                $('#response').text(response);
+                $('#response_pdf').text(response);
             },
             error: function(error) {
                 console.log(error);

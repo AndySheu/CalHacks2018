@@ -7,6 +7,11 @@ def search():
     term = request.form['input_text']
     return summarize.main(term)
 
+@app.route('/summarizePDF', methods = ['Post'])
+def summarize():
+	pdf_file = request.form['pdf_upload']
+	return summarize.pdf(pdf_file)
+
 @app.route('/')
 def index():
     return render_template('index.html')
