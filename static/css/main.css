@@ -3,6 +3,7 @@
 .nav-link{ margin-right: 1em !important;}
 .nav-link:hover{ background: #325C74; color: #ffffff; }
 .navbar-collapse{ justify-content: flex-end;}
+.navbar-brand:hover{ background: #325C74; color: #ffffff; }
 .navbar-toggler{background:#fff !important;}
 .bg-dark{
 background-color:#343a40!important
@@ -56,6 +57,21 @@ background-color:#007bff!important
 
 }
 
+#pdf_submit_form {
+  	top: 100%;
+  	transform: translateY(0%);
+}
+
+#btn_submit_pdf {
+  	top: 100%;
+  	transform: translateY(0%);
+}
+
+#response_pdf {
+  	top: 100%;
+  	transform: translateY(0%);
+}
+
 .type_in_to_summarize{
 	background-image: url('white_paper.jpg');
 	position: relative;
@@ -65,6 +81,13 @@ background-color:#007bff!important
 	display:block;
 	margin-left: auto;
 	position: absolute;
+  	top: 25%;
+  	transform: translateY(-75%);
+}
+
+#response {
+	margin-left: auto;
+	position: absolute;
   	top: 40%;
   	transform: translateY(-60%);
 }
@@ -72,8 +95,8 @@ background-color:#007bff!important
 #btn_submit_text {
 	margin-left: auto;
 	position: absolute;
-  	top: 70%;
-  	transform: translateY(-41%);
+  	top: 32%;
+  	transform: translateY(-68%);
 }
 
 /*.pdf_summarize p{
