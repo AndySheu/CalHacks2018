@@ -17,6 +17,13 @@ def summarize():
 def index():
     return render_template('index.html')
 
+@app.route('/file', methods=['Post'])
+def save(fi, ty):
+    file = open('a.' + ty, 'w')
+    file.write(fi)
+    file.close()
+    return summarize.main('a.' + ty)
+
 if __name__ == '__main__':
     app.run()
 
