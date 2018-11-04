@@ -58,7 +58,15 @@
 
 <div class = "pdf_summarize" id = "pdf_summarize"> 
 	<div class = "container">
-		<p> PDF_SUMMARIZE </p>
+		<form id = "pdf_submit_form" style = "text-align:center">
+      <textarea class = "text_input" rows = "5" cols="80" name="input_pdf"> What do you want to summarize? </textarea> <br>
+      <button id = "btn_submit_pdf" class="btn btn-outline-secondary btn-lg"> Submit! </button>
+    </form>
+
+    <div>
+        <p id = "response_pdf"> RESPONSE TEXT GOES HERE </p>
+    </div>
+
 	</div>
 </div>
 

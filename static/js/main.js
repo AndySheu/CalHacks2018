@@ -57,5 +57,24 @@ $(document).ready(function(){
         });
     });
 
+
+  $('#btn_submit_pdf').on('click', function(e) {
+        e.preventDefault(); 
+        $.ajax({
+            url: '/summarizeText',
+            data: $('#text_submit_form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log("success!");
+                $('#response').text(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+
+
+
 })
 
