@@ -63,7 +63,7 @@ $(document).ready(function(){
         $.ajax({
             url: '/summarizePDF',
            // data: $('#pdf_submit_form').serialize(),
-            data: new FormData($('#pdf_submit_form')[0]),
+            data: new FormData($('#pdf_submit_form')),
             type: 'POST',
 
             cache: false,
