@@ -9,6 +9,7 @@ import sys, os
 from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 from googlesearch import search
 import PyPDF2
+import textract
 
 sys.stdout = open(os.devnull, 'w')
 nltk.download('stopwords')
@@ -92,6 +93,11 @@ def text_file(path):
     return summarize(text)
 
 def pdf(path):
+    text = textract.process(path)
+    text = text.decode("utf-8")
+    print(text)
+    return summarize(text)
+    '''
     fi = open(path, 'rb')
     pdfReader = PyPDF2.PdfFileReader(fi)
     text = ''
@@ -107,6 +113,7 @@ def pdf(path):
         return summarize(text)
     else:
         print("PDF files should have text")
+    '''
 
 def local(fi):
     end = fi.split('.')[-1]
