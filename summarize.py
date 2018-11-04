@@ -151,12 +151,15 @@ def website(site):
     return summarize(text, ref)
 
 def topic(topic):    
-    if not website('https://en.wikipedia.org/wiki/' + topic):
+    a = website('https://en.wikipedia.org/wiki/' + topic)
+    if not a:
         s = search(topic, num=1)
         site = next(s)
         print('Looking at:', site)
-        if not website(site):
+        a = website(site)
+        if not a:
             print('Could not find website', site)
+    return a
 
 def main(i=None):
     if i == None:
