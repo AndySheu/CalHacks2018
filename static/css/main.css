@@ -55,14 +55,23 @@ background-color:#007bff!important
 }
 
 .type_in_to_summarize{
+	background-image: url('white_paper.jpg');
 	position: relative;
 }
 
 .text_input {
 	display:block;
 	margin-left: auto;
-	margin-right:auto;
+	margin-right: auto;
+	position: absolute;
+  	top: 50%;
+  	transform: translateY(-50%);
 }
+
+.btn btn-outline-secondary btn-lg {
+position: absolute;
+  	top: 50%;
+  	transform: translateY(-50%);}
 
 /*.pdf_summarize p{
 	margin-top: 10em;
