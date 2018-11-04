@@ -1,11 +1,11 @@
 from flask import Flask, request, render_template
-import main
+import summarize
 app = Flask(__name__)
 
 @app.route('/summarizeText', methods=['Post'])
 def search():
 	term = request.form['input_text']
-	return main(term)
+	return summarize.summarize(term)
 
 @app.route('/')
 def index():

@@ -65,6 +65,9 @@ def summarize(text, ref='', lines=7):
 
     best_sentences = heapq.nlargest(lines, scores, key=scores.get)
     best_sentences.sort(key=lambda x: sentence_score[x][2])
+
+    string = ''
+
     for s in best_sentences:
         if s[0] == ' ':
             s = s[1:]
@@ -77,15 +80,16 @@ def summarize(text, ref='', lines=7):
             print('\n')
             return
         print(s)
-    print('\n')
+        string += s + '\n'
+    return string
 
 def image(img):
     text = pytesseract.image_to_string(Image.open(img))
-    summarize(text)
+    return summarize(text)
 
 def text_file(path):
     text = open(path, 'r').read()
-    summarize(text)
+    return summarize(text)
 
 def pdf(path):
     fi = open(path, 'rb')
@@ -100,7 +104,7 @@ def pdf(path):
     fi.close()
     if converted:
         print(text)
-        summarize(text)
+        return summarize(text)
     else:
         print("PDF files should have text")
 
@@ -144,8 +148,7 @@ def website(site):
     for li in soup.find_all('li'):
         if ',' in li.text.lower() and 'last edited' not in li.text.lower() and 'text is available under the creative commons attribution-sharealike license' not in li.text.lower():
             ref.append(li.text.split('\n')[0])
-    summarize(text, ref)
-    return True
+    return summarize(text, ref)
 
 def topic(topic):    
     if not website('https://en.wikipedia.org/wiki/' + topic):
@@ -158,13 +161,14 @@ def topic(topic):
 def main(i):
     #if i == None:
         #i = get_input()
+    print(type(i))
     if i == 'exit' or i == 'quit':
         os.system('clear')
         quit()
     elif i == 'clear':
         os.system('clear')
     elif '.' not in i:
-        topic(i)
+        return topic(i)
     else: 
         temp = i.split('.')
         parts = []
@@ -172,8 +176,8 @@ def main(i):
             parts += t.split('/')
         for d in ['com', 'edu', 'org', 'gov', 'net']:
             if d in parts or 'http' in i:
-                if not website(i):
-                    print('Could not find website:', i)
+                return website(i)
+                    #print('Could not find website:', i)
                 if len(sys.argv) < 2:
                     main()
         local(i)
