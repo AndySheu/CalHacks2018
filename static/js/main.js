@@ -48,7 +48,7 @@ $(document).ready(function(){
             data: $('#text_submit_form').serialize(),
             type: 'POST',
             success: function(response) {
-                console.log("success!");
+                console.log(response);
                 $('#response').text(response);
             },
             error: function(error) {

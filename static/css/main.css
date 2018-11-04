@@ -1,7 +1,7 @@
-.navbar{ background:#F97300;}
+.navbar{ background:#0080C6;}
 .nav-link , .navbar-brand{ color: #f4f4f4; cursor: pointer;}
 .nav-link{ margin-right: 1em !important;}
-.nav-link:hover{ background: #f4f4f4; color: #f97300; }
+.nav-link:hover{ background: #325C74; color: #ffffff; }
 .navbar-collapse{ justify-content: flex-end;}
 .navbar-toggler{background:#fff !important;}
 .bg-dark{
@@ -36,7 +36,7 @@ background-color:#007bff!important
 }
 
 .description h1{
- color:#F97300 ;
+ color:#0080C6 ;
 }
 .description p{
  color:#666;
@@ -45,8 +45,8 @@ background-color:#007bff!important
  line-height: 1.5;
 }
 .description button{
- border:1px  solid #F97300;
- background:#F97300;
+ border:1px  solid #0080C6;
+ background:#0080C6;
  color:#fff;
 }
 
