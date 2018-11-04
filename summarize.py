@@ -111,11 +111,11 @@ def pdf(path):
 def local(fi):
     end = fi.split('.')[-1]
     if end.lower() in ['bmp', 'pnm', 'png', 'jfif', 'jpeg', 'tiff']:
-        image(fi)
+        return image(fi)
     elif end.lower() in ['txt']:
-        text_file(fi)
+        return text_file(fi)
     elif end.lower() in ['pdf']:
-        pdf(fi)
+        return pdf(fi)
     else:
         print('Images must be: BMP, PNM, PNG, JFIF, JPEG, or TIFF')
         print('Text files must be: TXT, or PDF')
