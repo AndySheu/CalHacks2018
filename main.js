@@ -23,8 +23,22 @@ $(document).ready(function(){
  	},800)
   })
 
-
-
+  $(function() {
+    $('#btn_submit_text').click(function() {
+ 
+        $.ajax({
+            url: '/summarize_text',
+            data: $('#text_submit_form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                $('#response').text(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+});
 
 
 })
