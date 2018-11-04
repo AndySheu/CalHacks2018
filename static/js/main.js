@@ -23,7 +23,7 @@ $(document).ready(function(){
  	},800)
   })
 
-  $(function() {
+  /*$(function() {
     $('#btn_submit_text').click(function() {
         $.ajax({
             url: '/summarizeText',
@@ -38,8 +38,24 @@ $(document).ready(function(){
             }
         });
     });
-});
+  });
+*/
 
+  $('#btn_submit_text').on('click', function(e) {
+        e.preventDefault(); 
+        $.ajax({
+            url: '/summarizeText',
+            data: $('#text_submit_form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log("success!");
+                $('#response').text(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
 
 })
 
