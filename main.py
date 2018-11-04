@@ -121,7 +121,7 @@ def website(site):
     soup = bs4.BeautifulSoup(page, 'lxml')
     text = ''
     for para in soup.find_all('p'):
-        text += para.text
+        text += '. ' + para.text
     ref = []
     for li in soup.find_all('li'):
         if ',' in li.text.lower() and 'last edited' not in li.text.lower() and 'text is available under the creative commons attribution-sharealike license' not in li.text.lower():
