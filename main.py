@@ -155,9 +155,9 @@ def topic(topic):
         if not website(site):
             print('Could not find website', site)
 
-def main(i=None):
-    if i == None:
-        i = get_input()
+def main(i):
+    #if i == None:
+        #i = get_input()
     if i == 'exit' or i == 'quit':
         os.system('clear')
         quit()
@@ -180,4 +180,4 @@ def main(i=None):
     if len(sys.argv) < 2:
         main()
 
-main()
+#main()
