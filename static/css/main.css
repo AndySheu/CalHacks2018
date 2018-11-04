@@ -53,8 +53,7 @@ background-color:#007bff!important
 
 .pdf_summarize{
 	position: relative;
-	background-image: url('white_paper.jpg');
-
+	background-image: url('white.jpg');
 }
 
 #pdf_submit_form {
