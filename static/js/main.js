@@ -62,13 +62,30 @@ $(document).ready(function(){
         e.preventDefault(); 
         $.ajax({
             url: '/summarizePDF',
-            data: $('#pdf_submit_form').serialize(),
+           // data: $('#pdf_submit_form').serialize(),
+            data: new FormData($('#pdf_submit_form')),
             type: 'POST',
 
             cache: false,
             contentType: false,
             processData: false,
 
+            xhr: function() {
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) {
+                    // For handling the progress of the upload
+                    myXhr.upload.addEventListener('progress', function(e) {
+                        if (e.lengthComputable) {
+                            $('progress').attr({
+                                value: e.loaded,
+                                max: e.total,
+                            });
+                        }
+                    } , false);
+                }
+                return myXhr;
+            }
+            
             success: function(response) {
                 console.log("success!");
                 $('#response_pdf').text(response);
