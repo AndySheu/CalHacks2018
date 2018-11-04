@@ -68,7 +68,7 @@ def summarize(text, ref='', lines=7):
     for s in best_sentences:
         if s[0] == ' ':
             s = s[1:]
-        if 'refer' in s and len(scores.keys()) < 2:
+        if 'refer' in s and len(scores.keys()) < 4:
             print('Please be more specific\n')
             if len(ref) > 1:
                 print('Here are some suggestions:')
@@ -116,29 +116,48 @@ def local(fi):
         print('Images must be: BMP, PNM, PNG, JFIF, JPEG, or TIFF')
         print('Text files must be: TXT, or PDF')
 
+def parse(text):
+    text = text.split('.')
+    temp = []
+    for t in text:
+        temp += t.split('!')
+    text = []
+    for t in temp:
+        text += t.split('?')
+    return '. '.join(text)
+
 def website(site):
-    page = urllib.request.urlopen(site).read()
+    try:
+        page = urllib.request.urlopen(site).read()
+    except Exception:
+        return False
     soup = bs4.BeautifulSoup(page, 'lxml')
     text = ''
     for para in soup.find_all('p'):
-        text += '. ' + para.text
+        if not para.text:
+            continue
+        parsed = parse(para.text)
+        text += parsed
+        if parsed[-1] not in ['.', '!', '?']:
+            text += '. '
     ref = []
     for li in soup.find_all('li'):
         if ',' in li.text.lower() and 'last edited' not in li.text.lower() and 'text is available under the creative commons attribution-sharealike license' not in li.text.lower():
             ref.append(li.text.split('\n')[0])
     summarize(text, ref)
+    return True
 
 def topic(topic):    
-    try:
-        website('https://en.wikipedia.org/wiki/' + topic)
-    except urllib.error.HTTPError:
+    if not website('https://en.wikipedia.org/wiki/' + topic):
         s = search(topic, num=1)
         site = next(s)
         print('Looking at:', site)
-        website(site)
+        if not website(site):
+            print('Could not find website', site)
 
-def main():
-    i = get_input()
+def main(i=None):
+    if i == None:
+        i = get_input()
     if i == 'exit' or i == 'quit':
         os.system('clear')
         quit()
@@ -152,11 +171,13 @@ def main():
         for t in temp:
             parts += t.split('/')
         for d in ['com', 'edu', 'org', 'gov', 'net']:
-            if d in parts:
-                website(i)
-                return
+            if d in parts or 'http' in i:
+                if not website(i):
+                    print('Could not find website:', i)
+                if len(sys.argv) < 2:
+                    main()
         local(i)
-    if len(sys.argv) == 1:
+    if len(sys.argv) < 2:
         main()
 
 main()
