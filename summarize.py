@@ -169,8 +169,10 @@ def main(i=None):
         quit()
     elif i == 'clear':
         os.system('clear')
+    elif len(i) > 1000:
+        return summarize(i)
     elif '.' not in i:
-        topic(i)
+        return topic(i)
     else: 
         temp = i.split('.')
         parts = []
@@ -178,12 +180,10 @@ def main(i=None):
             parts += t.split('/')
         for d in ['com', 'edu', 'org', 'gov', 'net']:
             if d in parts or 'http' in i:
-                if not website(i):
+                a = website(i)
+                if not a:
                     print('Could not find website:', i)
-                if len(sys.argv) < 2:
-                    main()
-        local(i)
-    if len(sys.argv) < 2:
-        main()
+                return a
+        return local(i)
 
 #main()
