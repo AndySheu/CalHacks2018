@@ -63,16 +63,16 @@ background-color:#007bff!important
 
 .text_input {
 	display:block;
-	margin: 0 auto;
+	margin-left: auto;
 	position: absolute;
   	top: 40%;
   	transform: translateY(-60%);
 }
 
 #btn_submit_text {
-	margin-left: -100px;
+	margin-left: auto;
 	position: absolute;
-  	top: 59%;
+  	top: 70%;
   	transform: translateY(-41%);
 }
 
