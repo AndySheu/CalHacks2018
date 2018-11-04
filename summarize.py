@@ -158,17 +158,16 @@ def topic(topic):
         if not website(site):
             print('Could not find website', site)
 
-def main(i):
-    #if i == None:
-        #i = get_input()
-    print(type(i))
+def main(i=None):
+    if i == None:
+        i = get_input()
     if i == 'exit' or i == 'quit':
         os.system('clear')
         quit()
     elif i == 'clear':
         os.system('clear')
     elif '.' not in i:
-        return topic(i)
+        topic(i)
     else: 
         temp = i.split('.')
         parts = []
@@ -176,8 +175,8 @@ def main(i):
             parts += t.split('/')
         for d in ['com', 'edu', 'org', 'gov', 'net']:
             if d in parts or 'http' in i:
-                return website(i)
-                    #print('Could not find website:', i)
+                if not website(i):
+                    print('Could not find website:', i)
                 if len(sys.argv) < 2:
                     main()
         local(i)
