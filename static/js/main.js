@@ -56,20 +56,32 @@ $(document).ready(function(){
             }
         });
     });
+  /*
+var file; 
+var file_type; 
 
+  $('#pdf_upload').on('change', function() {
+      file = this.files[0];
+      // Also see .name, .type
+  });
+
+  $('#file_type').on('change', function() {
+      file_type = this.text(); 
+  })
+
+  */
 
   $('#btn_submit_pdf').on('click', function(e) {
         e.preventDefault(); 
         $.ajax({
             url: '/summarizePDF',
-           // data: $('#pdf_submit_form').serialize(),
-            data: new FormData($('#pdf_submit_form')),
+            data: $('#pdf_submit_form').serialize(),
             type: 'POST',
 
             cache: false,
             contentType: false,
             processData: false,
-
+/*
             xhr: function() {
                 var myXhr = $.ajaxSettings.xhr();
                 if (myXhr.upload) {
@@ -84,8 +96,8 @@ $(document).ready(function(){
                     } , false);
                 }
                 return myXhr;
-            }
-            
+            }*/
+
             success: function(response) {
                 console.log("success!");
                 $('#response_pdf').text(response);
