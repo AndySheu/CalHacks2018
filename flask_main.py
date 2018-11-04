@@ -14,7 +14,7 @@ def index():
 @app.route('/summarizePDF', methods = ['Post'])
 def save():
     print(-1)
-    fi = request.files[0]
+    fi = request.files['file']
     print(0)
     ty = request.form['file_type']
     print(1)
