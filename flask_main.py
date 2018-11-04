@@ -13,13 +13,21 @@ def index():
 
 @app.route('/summarizePDF', methods = ['Post'])
 def save():
-	fi = request.form['pdf_upload']
-	ty = request.form['file_type']
-
+    print(-1)
+    fi = request.form['pdf_upload']
+    print(0)
+    ty = request.form['file_type']
+    print(1)
     file = open('a.' + ty, 'w')
+    print(2)
     file.write(fi)
+    print(3)
     file.close()
-    return summarize.main('a.' + ty)
+    print(4)
+    a = summarize.main('a.' + ty)
+    print(a)
+    print('\n\n\n')
+    return a
 
 if __name__ == '__main__':
     app.run()
