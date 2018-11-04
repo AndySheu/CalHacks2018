@@ -23,25 +23,7 @@ $(document).ready(function(){
  	},800)
   })
 
-  /*$(function() {
-    $('#btn_submit_text').click(function() {
-        $.ajax({
-            url: '/summarizeText',
-            data: $('#text_submit_form').serialize(),
-            type: 'POST',
-            success: function(response) {
-                console.log("success!");
-                $('#response').text(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    });
-  });
-*/
-
-  $('#btn_submit_text').on('click', function(e) {
+    $('#btn_submit_text').on('click', function(e) {
         e.preventDefault(); 
         $.ajax({
             url: '/summarizeText',
@@ -56,59 +38,5 @@ $(document).ready(function(){
             }
         });
     });
-  /*
-var file; 
-var file_type; 
-
-  $('#pdf_upload').on('change', function() {
-      file = this.files[0];
-      // Also see .name, .type
-  });
-
-  $('#file_type').on('change', function() {
-      file_type = this.text(); 
-  })
-
-  */
-
-  $('#btn_submit_pdf').on('click', function(e) {
-        e.preventDefault(); 
-        $.ajax({
-            url: '/summarizePDF',
-            data: new FormData($('#pdf_submit_form')[0]),
-            type: 'POST',
-
-            cache: false,
-            contentType: false,
-            processData: false,
-/*
-            xhr: function() {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) {
-                    // For handling the progress of the upload
-                    myXhr.upload.addEventListener('progress', function(e) {
-                        if (e.lengthComputable) {
-                            $('progress').attr({
-                                value: e.loaded,
-                                max: e.total,
-                            });
-                        }
-                    } , false);
-                }
-                return myXhr;
-            }*/
-
-            success: function(response) {
-                console.log("success!");
-                $('#response_pdf').text(response);
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    });
-
-
-
 })
 
